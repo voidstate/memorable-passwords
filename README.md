@@ -14,14 +14,14 @@ All examples assume:
 use voidstate\MemorablePassword;
 ~~~~
 
-**Memorable password with 2 digits and one capitalised letter:**
+**Memorable password with 2 digits and 1 capitalised letter:**
 
 ~~~~
 $memorablePassword = new MemorablePassword( 2, MemorablePassword::CAPITALISE_MODE_ONE );
 $password = $memorablePassword->generate();
 ~~~~
 
-**Memorable password with 2 digits and one capitalised letter, only using UK place names:**
+**Memorable password with 1 digit and 1 capitalised letter, only using UK place names:**
 
 ~~~~
 $memorablePassword = MemorablePassword( 1, MemorablePassword::CAPITALISE_MODE_ONE, MemorablePassword::WORD_LIST_MODE_ONLY_UK );

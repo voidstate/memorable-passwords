@@ -3,7 +3,7 @@
  * Class to generate a password easily memorable by humans. Place names have a UK bias.
  */
 
-namespace voidstate;
+namespace Voidstate;
 
 class MemorablePassword
 {

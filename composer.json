@@ -1,0 +1,18 @@
+{
+  "name": "voidstate/memorable-passwords",
+  "description": "Utility class for generating easily-memorable yet secure passwords with a slight UK bias.",
+  "keywords": [
+    "passwords"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "fergus hadley",
+      "email": "ferg@voidstate.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.0.0"
+  }
+}

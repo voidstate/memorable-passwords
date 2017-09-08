@@ -1,6 +1,6 @@
 {
   "name": "voidstate/memorable-passwords",
-  "description": "Utility class for generating easily-memorable yet secure passwords with a slight UK bias.",
+  "description": "Utility PHP class for generating easily-memorable yet secure passwords (with a slight UK bias if using place names).",
   "keywords": [
     "passwords"
   ],

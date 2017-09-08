@@ -10,24 +10,24 @@ class MemorablePassword
 
 	protected $_num_digits;
 	protected $_capitalise_mode;
-	protected $_wordlist_mode;
+	protected $_word_list_mode;
 
 	const CAPITALISE_MODE_NONE = 'none';
 	const CAPITALISE_MODE_ONE = 'one';
 	const CAPITALISE_MODE_SOME = 'some';
 
-	const WORDLIST_MODE_ALL = 'all';
-	const WORDLIST_MODE_ABSTRACT_WORDS_ONLY = 'abstract_words_only';
-	const WORDLIST_MODE_ONLY_UK = 'uk_only';
-	const WORDLIST_MODE_ONLY_WORLDWIDE = 'worldwide_only';
-	const WORDLIST_MODE_ALL_LOCATIONS = 'all_locations';
-	const WORDLIST_MODE_NOT_ABSTRACT = 'not_abstract';
+	const WORD_LIST_MODE_ALL = 'all';
+	const WORD_LIST_MODE_ABSTRACT_WORDS_ONLY = 'abstract_words_only';
+	const WORD_LIST_MODE_ONLY_UK = 'uk_only';
+	const WORD_LIST_MODE_ONLY_WORLDWIDE = 'worldwide_only';
+	const WORD_LIST_MODE_ALL_LOCATIONS = 'all_locations';
+	const WORD_LIST_MODE_NOT_ABSTRACT = 'not_abstract';
 
-	public function __construct( $num_digits = 3, $capitalise_mode = self::CAPITALISE_MODE_NONE, $wordlist_mode = self::WORDLIST_MODE_ABSTRACT_WORDS_ONLY )
+	public function __construct( $num_digits = 3, $capitalise_mode = self::CAPITALISE_MODE_NONE, $word_list_mode = self::WORD_LIST_MODE_ABSTRACT_WORDS_ONLY )
 	{
 		$this->_num_digits = $num_digits;
 		$this->_capitalise_mode = $capitalise_mode;
-		$this->_wordlist_mode = $wordlist_mode;
+		$this->_word_list_mode = $word_list_mode;
 
 		// seed random number generator
 		mt_srand( ( float)microtime() * 1000000 );
@@ -73,11 +73,11 @@ class MemorablePassword
 	/**
 	 * Change the mode used to select the word element
 	 *
-	 * @param const $wordlist_mode
+	 * @param const $word_list_mode
 	 */
-	public function setWordlistMode( $wordlist_mode )
+	public function setWordListMode( $word_list_mode )
 	{
-		$this->_wordlist_mode = $wordlist_mode;
+		$this->_word_list_mode = $word_list_mode;
 	}
 
 	/**
@@ -111,48 +111,48 @@ class MemorablePassword
 	/**
 	 * Return a single word (used for external building of passwords)
 	 *
-	 * @param bool $character_limit
+	 * @param bool $max_length
 	 *
 	 * @return string
 	 */
-	function getWord( $character_limit = false )
+	function getWord( $max_length = false )
 	{
 		// Which word list? 0, 1 or 2 represents 3 lists
-		if( $this->_wordlist_mode == self::WORDLIST_MODE_ABSTRACT_WORDS_ONLY )
+		if( $this->_word_list_mode == self::WORD_LIST_MODE_ABSTRACT_WORDS_ONLY )
 		{
-			$wordlist = 0;
+			$word_list = 0;
 		}
-		else if( $this->_wordlist_mode == self::WORDLIST_MODE_ALL )
+		else if( $this->_word_list_mode == self::WORD_LIST_MODE_ALL )
 		{
-			$wordlist = rand( 0, 1 ) ? 0 : rand( 1, 2 ); // weight towards safe words
+			$word_list = rand( 0, 1 ) ? 0 : rand( 1, 2 ); // weight towards safe words
 		}
-		else if( $this->_wordlist_mode == self::WORDLIST_MODE_ALL_LOCATIONS )
+		else if( $this->_word_list_mode == self::WORD_LIST_MODE_ALL_LOCATIONS )
 		{
-			$wordlist = rand( 1, 2 );
+			$word_list = rand( 1, 2 );
 		}
-		else if( $this->_wordlist_mode == self::WORDLIST_MODE_ONLY_UK )
+		else if( $this->_word_list_mode == self::WORD_LIST_MODE_ONLY_UK )
 		{
-			$wordlist = 1;
+			$word_list = 1;
 		}
-		else if( $this->_wordlist_mode == self::WORDLIST_MODE_ONLY_WORLDWIDE )
+		else if( $this->_word_list_mode == self::WORD_LIST_MODE_ONLY_WORLDWIDE )
 		{
-			$wordlist = 2;
+			$word_list = 2;
 		}
-		else if( $this->_wordlist_mode == self::WORDLIST_MODE_NOT_ABSTRACT )
+		else if( $this->_word_list_mode == self::WORD_LIST_MODE_NOT_ABSTRACT )
 		{
-			$wordlist = rand( 1, 2 );
+			$word_list = rand( 1, 2 );
 		}
 
 		// load words
-		if( $wordlist == 0 )
+		if( $word_list == 0 )
 		{
 			$words = $this->_getSafeWords();
 		}
-		else if( $wordlist == 1 )
+		else if( $word_list == 1 )
 		{
 			$words = $this->_getUkLocations();
 		}
-		else if( $wordlist == 2 )
+		else if( $word_list == 2 )
 		{
 			$words = $this->_getWorldwideLocations();
 		}
@@ -161,7 +161,7 @@ class MemorablePassword
 		while( $attempts < 50 )
 		{
 			$word = $words[ mt_rand( 0, count( $words ) - 1 ) ];
-			if( strlen( $word ) <= $character_limit || $character_limit == false )
+			if( strlen( $word ) <= $max_length || $max_length == false )
 			{
 				return $this->_capitalise( $word );
 			}

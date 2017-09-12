@@ -59,9 +59,9 @@ $password = $memorablePassword->getWord( 10 );
 ## Versioning
 
 This project uses [SemVer](http://semver.org/). Given a `MAJOR.MINOR.PATCH` version number, we will increment the:
-- `MAJOR` version when existing content is changed in such a way that it can break consumers of the data. *Used if the XWS format changes in a breaking manner*
-- `MINOR` version when new content is added in a backwards-compatible manner, or existing content is changed in a backwards-compatible manner. *Used for adding new cards.*
-- `PATCH` version when fixing mistakes in existing content. *Used for replacing cards with better quality versions of the image.*
+- `MAJOR` version when existing content is changed in such a way that it can break consumers of the data. 
+- `MINOR` version when new content is added in a backwards-compatible manner, or existing content is changed in a backwards-compatible manner. 
+- `PATCH` version when fixing mistakes in existing content. 
 
 ## History
 
